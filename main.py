@@ -24,7 +24,8 @@ def get_List(content):
         except Exception:
             Price = 0
         try:
-            Extra = int(re.search('Spese condominiali<!--[^€]*€([^/]*)', html).groups()[0].strip())
+            regex = '<div[^<>][^<>]*>.*spese condominiali .*?€.*?([0-9]+).*?<\/div>|Spese condominiali<!--[^€]*€([^/]*)'
+            Extra = int(re.search(regex, html, re.IGNORECASE).groups()[0].strip())
         except Exception:
             Extra = 0
         results.append(Result("lol", Price, Extra, link))
